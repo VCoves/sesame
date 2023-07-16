@@ -1,0 +1,21 @@
+version: '3.3'
+services:
+  pythonapp:
+    build: ./
+    command: python3 ./sample.py
+    network_mode: "host"
+    logging:
+      driver: none
+    depends_on:
+      - chromedriver
+    environment:
+            - PYTHONUNBUFFERED=1
+    container_name: sesame_hr
+  chromedriver:
+    image: seleniarm/standalone-chromium:latest
+    shm_size: 2gb
+    ports:
+      - '4444:4444'
+      - '5900:5900'
+      - '7900:7900'
+    #docker run --rm -it -p 4444:4444 -p 5900:5900 -p 7900:7900 --shm-size 2g seleniarm/standalone-chromium:latest    
